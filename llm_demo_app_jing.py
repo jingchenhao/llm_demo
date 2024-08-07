@@ -4,8 +4,8 @@ from openai import OpenAI
 import os
 
 # add your openAI key as environment varialbe
-#os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
-os.environ["OPENAI_API_KEY"] = os.getenv("API_KEY")
+os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
+#os.environ["OPENAI_API_KEY"] = os.getenv("API_KEY")
 # create a client to make the call
 client = OpenAI()
 
