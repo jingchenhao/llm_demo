@@ -1,11 +1,11 @@
-# this is a streamlit app that allows use the llm for assessment design
+# this is a streamlit app that allows the use of llm for assessment design
 import streamlit as st
 from openai import OpenAI
 import os
 
 # add your openAI key as environment varialbe
 os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
-#os.environ["OPENAI_API_KEY"] = os.getenv("API_KEY")
+
 # create a client to make the call
 client = OpenAI()
 
@@ -53,25 +53,25 @@ def age_analysis(sentence,age_group):
     return response.choices[0].message.content
 
 
-st.title("Item Evaluation")
-st.markdown('This is a simple app to evaluate items by using ChatGPT API. For questions, please contact: <jingchenhao@gmali.com>')
+st.title("Simple Item Review")
+st.markdown('This is a simple app to check items by using ChatGPT API. For questions, please contact: <jingchenhao@gmail.com>')
 st.markdown('---')
 
 st.markdown("### Please enter your item to start:")
-item = st.text_area("",height=400)
+item = st.text_area("",height=300)
 
-st.markdown('### 1. Check language usage of the item')
-if st.button('Click to check the language'):
+st.markdown('### 1. Grammar and Spelling')
+if st.checkbox('Check here to start',key='grammar'):
     text_analysis_result = text_analysis(item)
     st.write(text_analysis_result)
 
-st.markdown('### 2. Check age appropriateness')
-age = st.selectbox('Please select an age group',options=["Elementary School",'Middle School','High School','College and above'])
-if st.button('Click to check'):
+st.markdown('### 2. Age Appropriateness')
+age = st.selectbox('Please select an age group',options=['Elementary School','Middle School','High School','College and above'])
+if st.checkbox('Check here to start',key='age'):
     result = age_analysis(item,age)
     st.write(result)
 
-st.markdown('### 3. Get a Spanish version')
-if st.button('Click to translate the item into Spanish'):
+st.markdown('### 3. Spanish Translation')
+if st.checkbox('Check here to start',key='spanish'):
     spanish_translation = spanish_translate(item,"spanish")
     st.write(spanish_translation)
